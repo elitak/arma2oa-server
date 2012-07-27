@@ -1,0 +1,9 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: arma2oa-server
+Source: http://bistudio.com
+
+Files: *
+Copyright: 2010 Bohemia Interactive Studio
+License: All rights reserved.
+ For more information please visit
+ http://community.bistudio.com/wiki/ArmA:_Dedicated_Server

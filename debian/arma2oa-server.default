@@ -1,0 +1,14 @@
+# Defaults for arma2oa-server initscript
+# sourced by /etc/init.d/arma2oa-server
+# installed at /etc/default/arma2oa-server by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Where the game assets are located.
+ASSETS_DIR="/var/lib/arma2oa-server"
+
+# Additional options that are passed to the Daemon.
+# e.g., "-cpucount=4 -someotheropt"
+DAEMON_OPTS=""

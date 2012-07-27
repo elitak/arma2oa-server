@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ $1 -ge 1 -a $1 -le 65535 ]; then
+   # implicit int-type check here
+   :
+else
+   echo "Give a numeric port number as the only argument to this script."
+   exit 1
+fi
+
+PORT=$1
+
+NAME=arma2oa-server
+
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+CONFIG=/etc/$NAME/$PORT.cfg
+PIDFILE=/var/run/$NAME/$PORT.pid
+LOGFILE=/var/log/$NAME/$PORT.log
+DAEMON=/usr/bin/$NAME
+
+mkdir -p $(dirname $PIDFILE) $(dirname $LOGFILE)
+
+ulimit -c 1000000
+
+cd $ASSETS_DIR
+# HACK: link etc since binary strips leading / from config path
+ln -sf /etc etc
+nohup $DAEMON -server -config=$CONFIG -port=$PORT -pid=$PIDFILE $DAEMON_OPTS >> $LOGFILE 2>&1

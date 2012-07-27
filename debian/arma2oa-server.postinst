@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+PKGNAME=$(basename $0 | cut -f1 -d.) # bad idea?
+[ -r /etc/default/$PKGNAME ] && . /etc/default/$PKGNAME
+
+case "$1" in
+    configure)
+        test -d $ASSETS_DIR || echo "ASSETS_DIR improperly set in /etc/default/$PKGNAME"
+        echo "Downcasing and cleaning ArmA 2 OA directory ($ASSETS_DIR)..."
+        find $ASSETS_DIR -depth | grep '[A-Z]' | xargs -I {} rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {}
+        find $ASSETS_DIR -type f | grep -E '\.(exe|dll|chm)' | xargs rm -f
+        #chown -R armaserver: $ASSETS_DIR
+        chmod -R ug=rwX,o=rX $ASSETS_DIR
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

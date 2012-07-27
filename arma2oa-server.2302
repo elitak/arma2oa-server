@@ -1,0 +1,4 @@
+check process arma2oa-server.2302 with pidfile /var/run/arma2oa-server/2302.pid
+	start = "/usr/bin/arma2oa-server-start 2302"
+	stop = "/bin/bash -c 'cat /var/run/arma2oa-server/2302.pid | xargs kill'"
+        #if uptime > 24 hours then restart

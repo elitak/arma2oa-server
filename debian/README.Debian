@@ -1,0 +1,18 @@
+arma2oa-server for Debian
+-------------------------
+
+I've replaced tolower.c with my own python implementation. It will be run as
+part of the post-installation configuration against the /var/lib/arma2oa-server
+directory, so put all the game assets in there before installing this package,
+or run "dpkg-reconfigure arma2oaserver" after installation or upon adding new
+files whose names need to be downcased.
+
+/etc/arma2oa-server.d/2302.cfg will be used by the watchdog to manage the
+server with default settings. If you need to run multiple servers, make altered
+copies of that file in that directory, ending in ".cfg". To temporarily disable
+certain servers, rename the ".cfg"s to anything else, like ".cfg.disabled".
+
+/etc/init.d/arma2oa-server will start/stop the watchdog, which is its own
+script in /usr/bin/arma2oa-server-watchdog .
+
+ -- Eric Litak <elitak@gmail.com>  Fri, 27 Jul 2012 09:00:00 +0200
