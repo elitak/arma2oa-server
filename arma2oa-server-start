@@ -9,6 +9,7 @@ else
 fi
 
 PORT=$1
+shift
 
 NAME=arma2oa-server
 
@@ -26,4 +27,4 @@ ulimit -c 1000000
 cd $ASSETS_DIR
 # HACK: link etc since binary strips leading / from config path
 ln -sf /etc etc
-nohup $DAEMON -server -config=$CONFIG -port=$PORT -pid=$PIDFILE $DAEMON_OPTS >> $LOGFILE 2>&1
+nohup $DAEMON -server -config=$CONFIG -port=$PORT -pid=$PIDFILE $DAEMON_OPTS $@ >> $LOGFILE 2>&1

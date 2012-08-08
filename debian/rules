@@ -10,8 +10,9 @@ override_dh_install:
 	# HACK since dh_install can't rename files
 	cp server arma2oa-server
 	dh_install arma2oa-server usr/bin
+	cp monitrc arma2oa-server
+	dh_install arma2oa-server etc/monit/conf.d
 	rm arma2oa-server
 	dh_install expansion var/lib/arma2oa-server
 	dh_install arma2oa-server-start usr/bin
 	dh_install 2302.cfg etc/arma2oa-server
-	dh_install arma2oa-server.2302 etc/monit/conf.d
