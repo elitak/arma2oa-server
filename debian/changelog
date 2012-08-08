@@ -1,5 +1,5 @@
 arma2oa-server (1.62.95577-Alpha-1) unstable; urgency=low
 
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+  * Initial release
 
- -- Eric Litak <elitak@gmail.com>  Fri, 27 Jul 2012 09:00:00 +0200
+ -- Eric Litak <elitak@gmail.com>  Wed, 08 Aug 2012 07:42:17 -0700

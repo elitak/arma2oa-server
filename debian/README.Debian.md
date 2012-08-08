@@ -56,11 +56,11 @@ I suggest making the following changes after installation:
 
 Now, you'll be able to use the monit command to control the server processes. A brief list of examples (run as root):
 
-* monit status
-* monit start arma2oa-server.2302
-* monit stop arma2oa-server.2302
+* `monit status`
+* `monit start arma2oa-server.2302`
+* `monit stop arma2oa-server.2302`
 
-Caveat: Watch out for `/etc/monit/conf.d/*.dpkg-old` or `-new` files. Merge and
+Caveat: Beware of `/etc/monit/conf.d/*.dpkg-old` or `-new` files. Merge and
 delete them, or else monit complains about duplicate definitions.
 
 `man monit` for further help.
@@ -68,12 +68,19 @@ delete them, or else monit complains about duplicate definitions.
 ### Adding Instances
 If you want to add more server instances, do the following:
 
-* copy `/etc/arma2oa-server/2302.cfg` to the new port number + `.cfg`; edit it appropriately.
-* edit `/etc/monit/conf.d/arma2oa-server` and add a new stanza with all instances of 2302 changed appropriately.
-* run `monit reload`
+* Copy `/etc/arma2oa-server/2302.cfg` to the new port number + `.cfg`; edit it appropriately.
+* Edit `/etc/monit/conf.d/arma2oa-server` and add a new stanza with all instances of 2302 changed appropriately.
+* Run `monit reload`.
 
 You'll then be able to start/stop the new instance under its new name. You may also add args particular to specific instances in each `start` line, if adding them in `/etc/default/arma2oa-server`'s `DAEMON_OPTS` isn't suitable.
 
+## Administration
+
+Logs for each instance are written to `/var/log/arma2oa-server/*.log`
+
+Use `monit` to start/stop/restart server instances.
+
+
 ---
 
- -- Eric Litak <elitak@gmail.com>  Fri, 27 Jul 2012 09:00:00 +0200
+ -- Eric Litak <elitak@gmail.com>   Wed, 08 Aug 2012 07:42:17 -0700
