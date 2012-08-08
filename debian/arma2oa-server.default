@@ -10,5 +10,5 @@
 ASSETS_DIR="/var/lib/arma2oa-server"
 
 # Additional options that are passed to the Daemon.
-# e.g., "-cpucount=4 -someotheropt"
+# e.g., "-cpucount=4 -mods=@somemod;@another"
 DAEMON_OPTS=""
