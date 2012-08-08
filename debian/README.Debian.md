@@ -6,7 +6,7 @@ You will, of course, need all the non-redistributable content of ArmA2:OA to be
 able to use this package.
 
 In case you're not familiar, the linux version of the dedicated server binary
-requires all files to be completely lowercase. I've replaced BIS's tolower.c
+requires all filenames to be completely lowercase. I've replaced BIS's `tolower.c`
 with a simple one-line bash script that will be run against the assets
 directory (i.e., where you normally copy all the game directory contents to,
 `/var/lib/arma2oa-server` by default), as part of the post-installation steps.
@@ -36,20 +36,26 @@ instances, including when and how to restart each process.
 Unfortunately, out of the box, monit as distributed in the debian package needs
 a few tweaks before it's really usable. That said, if you install this package
 and get the monit daemon running, your default server instance running on port
-2302 should work without problem. You can edit the 2302.cfg file and manually
+2302 should work without problem. You can edit the `2302.cfg` file and manually
 restart the server using `cat /var/run/arma2oa-server/2302.pid | xargs kill`.
 
-That said, I suggest making the following changes after installation:
+I suggest making the following changes after installation:
+
 * Edit `/etc/monit/monitrc`
-    * Change the line containing `set daemon 120` to something shorter, like 10.
+
+    * Change the line containing `set daemon 120` to something shorter, like `10`.
       This will cut down on the time it takes for your crashed server to come
       back up.
     * Uncomment the lines containing:
-        > set httpd port 2812 and
-        >   use address localhost  # only accept connection from localhost
-        >   allow localhost        # allow localhost to connect to the server and
-    * sudo invoke-rc.d monit restart
+
+            set httpd port 2812 and
+              use address localhost  # only accept connection from localhost
+              allow localhost        # allow localhost to connect to the server and
+
+* sudo invoke-rc.d monit restart
+
 Now, you'll be able to use the monit command to control the server processes. A brief list of examples (run as root):
+
 * monit status
 * monit start arma2oa-server.2302
 * monit stop arma2oa-server.2302
@@ -61,10 +67,12 @@ delete them, or else monit complains about duplicate definitions.
 
 ### Adding Instances
 If you want to add more server instances, do the following:
+
 * copy `/etc/arma2oa-server/2302.cfg` to the new port number + `.cfg`; edit it appropriately.
 * edit `/etc/monit/conf.d/arma2oa-server` and add a new stanza with all instances of 2302 changed appropriately.
 * run `monit reload`
-You'll then be able to start/stop the new instance under its new name. You may also add args particular to specific instances in each `start` line, if adding them in `/etc/default/arma2oa-server`'s DAEMON_OPTS isn't suitable.
+
+You'll then be able to start/stop the new instance under its new name. You may also add args particular to specific instances in each `start` line, if adding them in `/etc/default/arma2oa-server`'s `DAEMON_OPTS` isn't suitable.
 
 ---
 
